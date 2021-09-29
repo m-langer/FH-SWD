@@ -1,4 +1,6 @@
-# Assignment 01 Project Settings
+# Assignment 01 Project Settings 
+
+By Moritz Langer, Sandra Nägele
 
 ## Project Setting
 
@@ -31,8 +33,21 @@
 - What kind if input/output is going to be exchanged with these systems
 - Don't forget to draw the context border
 
+![image](./Library_ContextDiagram.png)
+
 ## Requirements
 
 - Functional requirements: What should the system do?
+  - Create the library with all medias
+  - Create customers
+  - Assign medias to customers
+  - Compute billing for customers
 - Non-functional requirements (NFR): How should the system fulfill its tasks? Identify 2-3 NFRs and make them measureable.
+  - stable (99,5% of all requests end positivly, less than 1 crash per 1000h runntime)
+  - maintainable (100% of functions are documented)
+  - usability (40+y can use the system)
 - Constraints: Is there anything within the project where you are not free to decide on?
+  - DB Structure?
+  - Media with specific categories, numbers
+  - tracking system (id, timestamp)
+  - GDPR
