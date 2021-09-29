@@ -27,9 +27,9 @@ jobs:
         uses: BaileyJM02/markdown-to-pdf@v1
         with: 
           input_dir: 01_Project Setting
-          image_dir: 01_Project Setting
+          images_dir: 01_Project Setting
           output_dir: pdfs
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v2
         with:
           name: docs
           path: pdfs
