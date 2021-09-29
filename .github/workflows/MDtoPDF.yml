@@ -28,4 +28,8 @@ jobs:
         with: 
           input_dir: 01_Project Setting
           output_dir: pdfs
+      - uses: actions/upload-artifact@v1
+        with:
+          name: docs
+          path: pdfs
 
