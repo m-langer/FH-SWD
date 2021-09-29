@@ -33,7 +33,7 @@ By Moritz Langer, Sandra Nägele
 - What kind if input/output is going to be exchanged with these systems
 - Don't forget to draw the context border
 
-![image](./Library_ContextDiagram.png)
+![Context Diagram](./images/Library_ContextDiagram.png)
 
 ## Requirements
 
