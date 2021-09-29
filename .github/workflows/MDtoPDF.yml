@@ -26,5 +26,5 @@ jobs:
       - name: Markdown to PDF and HTML
         uses: BaileyJM02/markdown-to-pdf@v1
         with: 
-          input_dir: 
+          input_dir: 01_Project Setting
 
