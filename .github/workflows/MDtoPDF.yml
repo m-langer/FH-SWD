@@ -33,4 +33,4 @@ jobs:
         with:
           name: docs
           path: pdfs
-
+          retention-days: 1
