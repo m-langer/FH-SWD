@@ -1,4 +1,4 @@
-# Assignment 01 Project Settings 
+# Assignment 01 Project Settings
 
 By Moritz Langer, Sandra Nägele
 
