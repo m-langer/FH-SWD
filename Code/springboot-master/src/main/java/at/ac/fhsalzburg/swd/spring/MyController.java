@@ -32,8 +32,9 @@ public class MyController {
 	
 	@Autowired 
 	CustomerServiceInterface customerService;
+
+	@Autowired
 	
-	    
     
 	@Autowired 
 	TestBean singletonBean;
