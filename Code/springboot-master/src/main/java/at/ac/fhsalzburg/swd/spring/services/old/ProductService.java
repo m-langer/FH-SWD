@@ -1,4 +1,4 @@
-package at.ac.fhsalzburg.swd.spring.services;
+package at.ac.fhsalzburg.swd.spring.services.old;
 
 
 import java.util.ArrayList;
@@ -7,8 +7,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import at.ac.fhsalzburg.swd.spring.dao.Product;
-import at.ac.fhsalzburg.swd.spring.dao.ProductRepository;
+
+import at.ac.fhsalzburg.swd.spring.dao.old.Product;
+import at.ac.fhsalzburg.swd.spring.dao.old.ProductRepository;
 
 
 @Service

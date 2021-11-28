@@ -1,4 +1,4 @@
-package at.ac.fhsalzburg.swd.spring.dao;
+package at.ac.fhsalzburg.swd.spring.dao.old;
 
 import java.util.List;
 
@@ -8,12 +8,13 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-public interface MediaRepository extends CrudRepository<Media, Long> {
+public interface CustomerRepository extends CrudRepository<Customer, Long> {
 
 	@Transactional(timeout = 10)
-	List<Media> findByLastName(String lastName);
+    List<Customer> findByLastName(String lastName);
 
 	@Transactional(timeout = 10)
-	Media findById(long id);
-
+	Customer findById(long id);
+	
+	
 }

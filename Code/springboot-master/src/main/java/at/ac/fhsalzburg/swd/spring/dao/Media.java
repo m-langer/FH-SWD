@@ -27,4 +27,7 @@ public class Media {
     public enum category {
         maths, physics, biology, thriller, fantasy, romance, action
     }
+
+    public Media() {
+    };
 }

@@ -1,11 +1,11 @@
-package at.ac.fhsalzburg.swd.spring.services;
+package at.ac.fhsalzburg.swd.spring.services.old;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import at.ac.fhsalzburg.swd.spring.dao.Customer;
-import at.ac.fhsalzburg.swd.spring.dao.CustomerRepository;
+import at.ac.fhsalzburg.swd.spring.dao.old.Customer;
+import at.ac.fhsalzburg.swd.spring.dao.old.CustomerRepository;
 
 
 @Service

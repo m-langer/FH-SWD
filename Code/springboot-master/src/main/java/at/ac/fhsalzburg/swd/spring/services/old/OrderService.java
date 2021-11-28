@@ -1,14 +1,15 @@
-package at.ac.fhsalzburg.swd.spring.services;
+package at.ac.fhsalzburg.swd.spring.services.old;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import at.ac.fhsalzburg.swd.spring.dao.Customer;
-import at.ac.fhsalzburg.swd.spring.dao.Order;
-import at.ac.fhsalzburg.swd.spring.dao.OrderRepository;
-import at.ac.fhsalzburg.swd.spring.dao.Product;
+
+import at.ac.fhsalzburg.swd.spring.dao.old.Customer;
+import at.ac.fhsalzburg.swd.spring.dao.old.Order;
+import at.ac.fhsalzburg.swd.spring.dao.old.OrderRepository;
+import at.ac.fhsalzburg.swd.spring.dao.old.Product;
 
 
 @Service

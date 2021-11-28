@@ -1,6 +1,6 @@
-package at.ac.fhsalzburg.swd.spring.services;
+package at.ac.fhsalzburg.swd.spring.services.old;
 
-import at.ac.fhsalzburg.swd.spring.dao.Customer;
+import at.ac.fhsalzburg.swd.spring.dao.old.Customer;
 
 public interface CustomerServiceInterface {
 	

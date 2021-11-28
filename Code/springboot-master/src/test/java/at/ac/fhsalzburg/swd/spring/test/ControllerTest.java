@@ -23,8 +23,8 @@ import static org.mockito.BDDMockito.*;
 
 import at.ac.fhsalzburg.swd.spring.CustomerForm;
 import at.ac.fhsalzburg.swd.spring.MyController;
-import at.ac.fhsalzburg.swd.spring.dao.Customer;
-import at.ac.fhsalzburg.swd.spring.dao.CustomerRepository;
+import at.ac.fhsalzburg.swd.spring.dao.old.Customer;
+import at.ac.fhsalzburg.swd.spring.dao.old.CustomerRepository;
 
 
 @ExtendWith(SpringExtension.class)

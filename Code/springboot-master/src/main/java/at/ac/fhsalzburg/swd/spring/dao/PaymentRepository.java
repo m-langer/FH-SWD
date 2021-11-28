@@ -8,12 +8,12 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-public interface MediaRepository extends CrudRepository<Media, Long> {
+public interface PaymentRepository extends CrudRepository<Payment, Long> {
 
 	@Transactional(timeout = 10)
-	List<Media> findByLastName(String lastName);
+    List<Payment> findByLastName(String lastName);
 
 	@Transactional(timeout = 10)
-	Media findById(long id);
+	Payment findById(long id);
 
 }

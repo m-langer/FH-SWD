@@ -17,9 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import at.ac.fhsalzburg.swd.spring.dao.Customer;
-import at.ac.fhsalzburg.swd.spring.services.CustomerServiceInterface;
-import at.ac.fhsalzburg.swd.spring.services.IAuthService;
+import at.ac.fhsalzburg.swd.spring.dao.old.Customer;
+import at.ac.fhsalzburg.swd.spring.services.old.CustomerServiceInterface;
 
 @Controller // marks the class as a web controller, capable of handling the HTTP requests. Spring will look at the methods of the class marked with the @Controller annotation and establish the routing table to know which methods serve which endpoints.
 public class MyController {
@@ -30,12 +29,8 @@ public class MyController {
 	@Resource(name = "sessionBean") // The @Resource annotation is part of the JSR-250 annotation collection and is packaged with Jakarta EE. This annotation has the following execution paths, listed by Match by Name, Match by Type, Match by Qualifier. These execution paths are applicable to both setter and field injection. https://www.baeldung.com/spring-annotations-resource-inject-autowire
 	TestBean sessionBean;
 	
-	
 	@Autowired 
 	CustomerServiceInterface customerService;
-
-	@Autowired
-	IAuthService authService;
     
 	@Autowired 
 	TestBean singletonBean;

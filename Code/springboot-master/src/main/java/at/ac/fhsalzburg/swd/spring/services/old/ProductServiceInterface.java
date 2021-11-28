@@ -1,8 +1,8 @@
-package at.ac.fhsalzburg.swd.spring.services;
+package at.ac.fhsalzburg.swd.spring.services.old;
 
 import java.util.Collection;
 
-import at.ac.fhsalzburg.swd.spring.dao.Product;
+import at.ac.fhsalzburg.swd.spring.dao.old.Product;
 
 public interface ProductServiceInterface {
 	

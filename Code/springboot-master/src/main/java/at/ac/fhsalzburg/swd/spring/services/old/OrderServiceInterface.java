@@ -1,8 +1,9 @@
-package at.ac.fhsalzburg.swd.spring.services;
+package at.ac.fhsalzburg.swd.spring.services.old;
 import java.util.Date;
-import at.ac.fhsalzburg.swd.spring.dao.Customer;
-import at.ac.fhsalzburg.swd.spring.dao.Order;
-import at.ac.fhsalzburg.swd.spring.dao.Product;
+
+import at.ac.fhsalzburg.swd.spring.dao.old.Customer;
+import at.ac.fhsalzburg.swd.spring.dao.old.Order;
+import at.ac.fhsalzburg.swd.spring.dao.old.Product;
 
 public interface OrderServiceInterface {
 	
