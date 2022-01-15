@@ -39,8 +39,8 @@ public class PersonalDataService implements IPersonalDataService {
     public PersonalData addData(String Name, String Lastname, String Adress, Date Birthday, String email,
             Boolean isStudent) {
         PersonalData toSave;
-        if (isStudent) {
-            toSave = new PersonalData(Name, Lastname, Adress, Birthday, email, personCategory.adultCust);
+        if (Boolean.TRUE.equals(isStudent)) {
+            toSave = new PersonalData(Name, Lastname, Adress, Birthday, email, personCategory.studentCust);
             repo.save(toSave);
             return toSave;
         } else {

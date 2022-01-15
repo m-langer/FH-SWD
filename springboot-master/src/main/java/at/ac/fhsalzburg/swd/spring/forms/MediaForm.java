@@ -1,28 +1,36 @@
 package at.ac.fhsalzburg.swd.spring.forms;
 
-import java.util.UUID;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 import at.ac.fhsalzburg.swd.spring.enums.mediaCategory;
 import at.ac.fhsalzburg.swd.spring.enums.mediaType;
 
-@Entity
 public class MediaForm {
 
     private String name;
     private String author;
     private mediaType type;
-    private String iSBN;
-    private String fSK;
+    private String iSBNfSK;
     private int length;
     private mediaCategory category;
+    private Boolean special;
 
     public String getName() {
         return name;
+    }
+
+    public String getiSBNfSK() {
+        return iSBNfSK;
+    }
+
+    public void setiSBNfSK(String iSBNfSK) {
+        this.iSBNfSK = iSBNfSK;
+    }
+
+    public Boolean getSpecial() {
+        return special;
+    }
+
+    public void setSpecial(Boolean special) {
+        this.special = special;
     }
 
     public void setName(String name) {
@@ -43,22 +51,6 @@ public class MediaForm {
 
     public void setType(mediaType type) {
         this.type = type;
-    }
-
-    public String getiSBN() {
-        return iSBN;
-    }
-
-    public void setiSBN(String iSBN) {
-        this.iSBN = iSBN;
-    }
-
-    public String getfSK() {
-        return fSK;
-    }
-
-    public void setfSK(String fSK) {
-        this.fSK = fSK;
     }
 
     public int getLength() {

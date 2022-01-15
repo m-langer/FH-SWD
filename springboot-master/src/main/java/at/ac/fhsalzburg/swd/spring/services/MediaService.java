@@ -54,5 +54,11 @@ public class MediaService implements IMediaService {
     public List<Media> getMedia(String name) {
         // TODO Auto-generated method stub
         return repo.findByName(name);
+    }
+
+    @Override
+    public Iterable<Media> getAll() {
+        // TODO Auto-generated method stub
+        return repo.findAll();
     };
 }

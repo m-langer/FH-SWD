@@ -22,9 +22,29 @@ public class Media {
     private String fSK;
     private int length;
     private mediaCategory category;
+    private int shelfNr;
+    private Boolean isRented;
+
+    protected Media() {}
+
+    public Boolean getIsRented() {
+        return isRented;
+    }
+
+    public void setIsRented(Boolean isRented) {
+        this.isRented = isRented;
+    }
+
+    public int getShelfNr() {
+        return shelfNr;
+    }
+
+    public void setShelfNr(int shelfNr) {
+        this.shelfNr = shelfNr;
+    }
 
     public Media(String name, String author, mediaType type, String iSBN, String fSK, int length,
-            mediaCategory category) {
+            mediaCategory category, int shelfNr) {
         this.name = name;
         this.author = author;
         this.type = type;
@@ -32,7 +52,21 @@ public class Media {
         this.fSK = fSK;
         this.length = length;
         this.category = category;
+        this.shelfNr = shelfNr;
+        this.isRented = false;
     }
+
+    public Media(String name, String author, mediaType type, String iSBN, String fSK, int length,
+    mediaCategory category) {
+this.name = name;
+this.author = author;
+this.type = type;
+this.iSBN = iSBN;
+this.fSK = fSK;
+this.length = length;
+this.category = category;
+this.isRented = false;
+}
 
     public UUID getId() {
         return id;

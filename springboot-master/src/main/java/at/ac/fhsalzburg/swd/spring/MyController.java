@@ -86,6 +86,7 @@ public class MyController {
 		model.addAttribute("customers", customerService.getAll());
 
 		model.addAttribute("pD", personalDataService.getAll());
+		model.addAttribute("media", mediaManagement.mediaService.getAll());
 
 		model.addAttribute("beanSingleton", singletonBean.getHashCode());
 
@@ -195,16 +196,27 @@ public class MyController {
 	public String rentMedia(Model model, @ModelAttribute("personalDataForm") MediaForm mForm) {
 		String Name = mForm.getName();
 		String Author = mForm.getAuthor();
-		String ISBN = mForm.getiSBN();
 		int length = mForm.getLength();
-		
 
 		switch (mForm.getType()) {
-			case simpleBook: case specializedBook:
+			case simpleBook:
+				mediaManagement.mediaService.addBook(Name, Author, mForm.getiSBNfSK(), length, mForm.getCategory(),
+						false);
 				break;
-			case movie: case movieAdult:
+			case specializedBook:
+				mediaManagement.mediaService.addBook(Name, Author, mForm.getiSBNfSK(), length, mForm.getCategory(),
+						true);
+				break;
+			case movie:
+				mediaManagement.mediaService.addMovie(Name, Author, mForm.getiSBNfSK(), length, mForm.getCategory(),
+						false);
+				break;
+			case movieAdult:
+				mediaManagement.mediaService.addMovie(Name, Author, mForm.getiSBNfSK(), length, mForm.getCategory(),
+						true);
 				break;
 			case cd:
+				mediaManagement.mediaService.addCD(Name, Author, length, mForm.getCategory());
 				break;
 			default:
 				break;
@@ -215,10 +227,10 @@ public class MyController {
 
 	@RequestMapping(value = { "/addMedia" }, method = RequestMethod.GET)
 	public String showAddMediaPage(Model model) {
-		PersonalDataForm personalDataForm = new PersonalDataForm();
-		model.addAttribute("personalDataForm", personalDataForm);
+		MediaForm mDTO = new MediaForm();
+		model.addAttribute("mediaDTO", mDTO);
 
-		return "addPersonalData";
+		return "addMedia";
 	}
 
 }

@@ -31,38 +31,39 @@
     </h2>
 
 
-    <form th:action="@{/addBook}" th:object="${customerForm}" method="POST">
-      First Name:
-      <input type="text" th:field="*{firstName}" />
+    <form th:action="@{/addMedia}" th:object="${mediaDTO}" method="POST">
+      Type:
+      <select th:field="*{type}">
+        <option th:each="t : ${T(at.ac.fhsalzburg.swd.spring.enums.mediaType).values()}"
+                th:value="${t}"
+                th:text="${t}">
+        </option>
+    </select>
+    <br/>
+      Name:
+      <input type="text" th:field="*{name}" />
       <br />
-      Last Name:
-      <input type="text" th:field="*{lastName}" />
+      Author:
+      <input type="text" th:field="*{author}" />
       <br />
-      eMail:
-      <input type="text" th:field="*{eMail}" />
+      ISBN / FSK
+      <input type="text" th:field="*{iSBNfSK}" />
       <br />
-      Tel:
-      <input type="text" th:field="*{tel}" />
+      Length
+      <input type="text" th:field="*{length}" />
+      <br />
+      Category:
+      <select th:field="*{category}">
+        <option th:each="c : ${T(at.ac.fhsalzburg.swd.spring.enums.mediaCategory).values()}"
+                th:value="${c}"
+                th:text="${c}">
+        </option>
+    </select>
       <br />
       <input type="submit" value="Create" />
     </form>
 
-
-
-
-    <a href="addCustomer">Add Customer</a>
     <br /><br />
-    <table border="1">
-      <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-      </tr>
-      <tr th:each="customer : ${customer}">
-        <td th:utext="${customer.firstName}">...</td>
-        <td th:utext="${customer.lastName}">...</td>
-      </tr>
-    </table>
-
   </main>
   <!-- /.container -->
 

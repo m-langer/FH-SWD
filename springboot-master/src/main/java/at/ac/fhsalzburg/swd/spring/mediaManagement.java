@@ -25,6 +25,7 @@ public class mediaManagement {
     IPersonalDataService personalDataService;
 
     @Autowired
+    public
     IMediaService mediaService;
 
     @Autowired
