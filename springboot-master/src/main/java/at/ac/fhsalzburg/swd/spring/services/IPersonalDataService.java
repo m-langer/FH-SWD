@@ -27,4 +27,6 @@ public interface IPersonalDataService {
     public abstract List<PersonalData> getByLastName(String Lastname);
 
     public abstract void changeToAdult(UUID personID);
+
+    public abstract void savePersonalData(PersonalData personalData);
 }

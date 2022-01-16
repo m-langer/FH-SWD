@@ -73,4 +73,10 @@ public class PersonalDataService implements IPersonalDataService {
         }
         repo.save(pd);
     }
+
+    @Override
+    public void savePersonalData(PersonalData personalData) {
+        // TODO Auto-generated method stub
+        repo.save(personalData);
+    }
 }

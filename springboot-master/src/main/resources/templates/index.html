@@ -25,7 +25,7 @@
 
 
   <main>
-
+    <!-- 
     <h1>Spring Boot Web Thymeleaf Example Hello</h1>
     <span th:text="${halloNachricht}"></span>
     <h2>
@@ -40,13 +40,13 @@
       <span th:text="'Prototype Bean, ' + ${beanPrototype}"></span>
       <br>
       <span th:text="'Session Bean, ' + ${beanSession}"></span>
-    </h2>
+    </h2> -->
+    <h1>Library Management System Dashboard</h1>
 
-    <a href="addCustomer">Add Customer</a>
-    <a href="addPersonalData">Add PersonalData</a>
-    <a href="addMedia">Add Media</a>
+    <!-- <a href="addCustomer">Add Customer</a> -->
+    <a href="/">Home</a>
     <br /><br />
-    <table border="1">
+    <!-- <table border="1">
       <tr>
         <th>First Name</th>
         <th>Last Name</th>
@@ -59,9 +59,12 @@
         <td th:utext="${customer.eMail}">...</td>
         <td th:utext="${customer.tel}">...</td>
       </tr>
-    </table>
-    <table>
+    </table> -->
+    <h2>All Personal Data</h2>
+    <a href="addPersonalData">Add PersonalData</a>
+    <table border="1" style="border-collapse: collapse;">
       <tr>
+        <th>ID</th>
         <th>First Name</th>
         <th>Last Name</th>
         <th>eMail</th>
@@ -69,6 +72,7 @@
         <th>person Type</th>
       </tr>
       <tr th:each="d : ${pD}">
+        <td th:utext="${d.id}">...</td>
         <td th:utext="${d.name}">...</td>
         <td th:utext="${d.lastName}">...</td>
         <td th:utext="${d.eMail}">...</td>
@@ -76,7 +80,10 @@
         <td th:utext="${d.category}">...</td>
       </tr>
     </table>
-    <table>
+    <h2>All Media in Bib</h2>
+    <a href="addMedia">Add Media</a>
+    <a href="findMedia">Find Media</a>
+    <table border="1" style="border-collapse: collapse;">
       <tr>
         <th>ID</th>
         <th>Name</th>
@@ -86,6 +93,7 @@
         <th>fsk</th>
         <th>length</th>
         <th>category</th>
+        <th>Is Rented out</th>
       </tr>
       <tr th:each="d : ${media}">
         <td th:utext="${d.id}">...</td>
@@ -96,13 +104,64 @@
         <td th:utext="${d.fSK}">...</td>
         <td th:utext="${d.length}">...</td>
         <td th:utext="${d.category}">...</td>
+        <td th:utext="${d.isRented}">...</td>
       </tr>
     </table>
+    <h2>All Rentals</h2>
+    <a href="addRental">Add Rental</a>
+    <a href="findRentals">Find Rental</a>
+    <a href="returnMedia">Return Media</a>
+    <table border="1" style="border-collapse: collapse;">
+      <tr>
+        <th>Rental ID</th>
+        <th>mediaID</th>
+        <th>personID</th>
+        <th>date</th>
+        <th>last Return</th>
+      </tr>
+      <tr th:each="d : ${rentals}">
+        <td th:utext="${d.id}">...</td>
+        <td th:utext="${d.mediaID}">...</td>
+        <td th:utext="${d.personID}">...</td>
+        <td th:utext="${d.date}">...</td>
+        <td th:utext="${d.latestReturn}">...</td>
+      </tr>
+    </table>
+    <!-- <h2>All Old Rentals</h2>
+    <table border="1" style="border-collapse: collapse;">
+      <tr>
+        <th>Rental ID</th>
+        <th>mediaID</th>
+        <th>personID</th>
+        <th>date</th>
+        <th>last Return</th>
+      </tr>
+      <tr th:each="d : ${rentalsOld}">
+        <td th:utext="${d.id}">...</td>
+        <td th:utext="${d.mediaID}">...</td>
+        <td th:utext="${d.personID}">...</td>
+        <td th:utext="${d.date}">...</td>
+        <td th:utext="${d.latestReturn}">...</td>
+      </tr>
+    </table> -->
+    <h2>All Outstanding Payments</h2>
+    <table border="1" style="border-collapse: collapse;">
+      <tr>
+        <th>Payment ID</th>
+        <th>Person ID</th>
+        <th>Amount</th>
+        <th>Description</th>
+      </tr>
+      <tr th:each="d : ${payments}">
+        <td th:utext="${d.id}">...</td>
+        <td th:utext="${d.personID}">...</td>
+        <td th:utext="${d.amount}">...</td>
+        <td th:utext="${d.description}">...</td>
+      </tr>
+    </table>
+
   </main>
   <!-- /.container -->
-
-
-
   <script src="js/vendor/modernizr-3.7.1.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>

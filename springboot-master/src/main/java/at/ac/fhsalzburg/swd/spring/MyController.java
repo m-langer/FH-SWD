@@ -3,8 +3,16 @@ package at.ac.fhsalzburg.swd.spring;
 import static org.mockito.Mockito.CALLS_REAL_METHODS;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -16,16 +24,22 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import at.ac.fhsalzburg.swd.spring.dao.Customer;
+import at.ac.fhsalzburg.swd.spring.dao.Media;
 import at.ac.fhsalzburg.swd.spring.dao.PersonalData;
+import at.ac.fhsalzburg.swd.spring.dao.Rental;
+import at.ac.fhsalzburg.swd.spring.enums.mediaCategory;
 import at.ac.fhsalzburg.swd.spring.enums.mediaType;
 import at.ac.fhsalzburg.swd.spring.forms.MediaForm;
 import at.ac.fhsalzburg.swd.spring.forms.PersonalDataForm;
+import at.ac.fhsalzburg.swd.spring.forms.RentalDTO;
 import at.ac.fhsalzburg.swd.spring.services.CustomerServiceInterface;
 import at.ac.fhsalzburg.swd.spring.services.IPersonalDataService;
 
@@ -87,6 +101,9 @@ public class MyController {
 
 		model.addAttribute("pD", personalDataService.getAll());
 		model.addAttribute("media", mediaManagement.mediaService.getAll());
+		model.addAttribute("rentals", mediaManagement.rentalService.getAll());
+		model.addAttribute("rentalsOld", mediaManagement.rentalService.getAllOld());
+		model.addAttribute("payments", mediaManagement.paymentService.getAll());
 
 		model.addAttribute("beanSingleton", singletonBean.getHashCode());
 
@@ -164,7 +181,7 @@ public class MyController {
 	// OWN CODE
 	//
 	//
-	@RequestMapping(value = { "/addPersonalData" }, method = RequestMethod.POST)
+	@PostMapping(value = { "/addPersonalData" })
 	public String addPersonalData(Model model, //
 			@ModelAttribute("personalDataForm") PersonalDataForm pDForm) { // The @ModelAttribute is an annotation that
 																			// binds a method parameter or method return
@@ -176,47 +193,45 @@ public class MyController {
 		String eMail = pDForm.geteMail();
 		String adress = pDForm.getAdress();
 		Date birthday = pDForm.getBirthday();
-
-		personalDataService.addData(firstName, lastName, adress, birthday, eMail);
-
+		personalDataService.addData(firstName, lastName, adress, birthday, eMail, pDForm.getIsStudent());
 		return "redirect:/";
 	}
 
-	@RequestMapping(value = { "/addPersonalData" }, method = RequestMethod.GET)
+	@GetMapping(value = { "/addPersonalData" })
 	public String showAddPersonalDataPage(Model model) {
 		PersonalDataForm personalDataForm = new PersonalDataForm();
+		personalDataForm.setIsStudent(false);
 		model.addAttribute("personalDataForm", personalDataForm);
-
-		model.addAttribute("message", customerService.doSomething());
-
 		return "addPersonalData";
 	}
 
-	@RequestMapping(value = { "/addMedia" }, method = RequestMethod.POST)
-	public String rentMedia(Model model, @ModelAttribute("personalDataForm") MediaForm mForm) {
+	@PostMapping(value = { "/addMedia" })
+	public String addMedia(Model model,
+			@ModelAttribute("mediaDTO") MediaForm mForm) {
 		String Name = mForm.getName();
 		String Author = mForm.getAuthor();
 		int length = mForm.getLength();
+		int shelf = mForm.getShelfNr();
 
 		switch (mForm.getType()) {
 			case simpleBook:
 				mediaManagement.mediaService.addBook(Name, Author, mForm.getiSBNfSK(), length, mForm.getCategory(),
-						false);
+						false, shelf);
 				break;
 			case specializedBook:
 				mediaManagement.mediaService.addBook(Name, Author, mForm.getiSBNfSK(), length, mForm.getCategory(),
-						true);
+						true, shelf);
 				break;
 			case movie:
 				mediaManagement.mediaService.addMovie(Name, Author, mForm.getiSBNfSK(), length, mForm.getCategory(),
-						false);
+						false, shelf);
 				break;
 			case movieAdult:
 				mediaManagement.mediaService.addMovie(Name, Author, mForm.getiSBNfSK(), length, mForm.getCategory(),
-						true);
+						true, shelf);
 				break;
 			case cd:
-				mediaManagement.mediaService.addCD(Name, Author, length, mForm.getCategory());
+				mediaManagement.mediaService.addCD(Name, Author, length, mForm.getCategory(), shelf);
 				break;
 			default:
 				break;
@@ -225,7 +240,7 @@ public class MyController {
 		return "redirect:/";
 	}
 
-	@RequestMapping(value = { "/addMedia" }, method = RequestMethod.GET)
+	@GetMapping(value = { "/addMedia" })
 	public String showAddMediaPage(Model model) {
 		MediaForm mDTO = new MediaForm();
 		model.addAttribute("mediaDTO", mDTO);
@@ -233,4 +248,166 @@ public class MyController {
 		return "addMedia";
 	}
 
+	@GetMapping(value = { "/listAllMedia" })
+	public String showAllMedia(Model model) {
+		model.addAttribute("media", mediaManagement.mediaService.getAll());
+		return "listMedia";
+	}
+
+	@GetMapping(value = { "/findMedia" })
+	public String showFindMediaPage(Model model) {
+		MediaForm mDTO = new MediaForm();
+		model.addAttribute("mediaDTO", mDTO);
+
+		return "findMedia";
+	}
+
+	@PostMapping(value = { "/findMedia" })
+	public String findMedia(
+			@ModelAttribute("mediaDTO") MediaForm mForm) {
+		String Name = mForm.getName();
+		String Author = mForm.getAuthor();
+		String isbnFsk = mForm.getiSBNfSK();
+		mediaCategory category = mForm.getCategory();
+		String result = "redirect:/listAllMediaBy?";
+		if (!Name.isEmpty()) {
+			result = result + "name=" + Name + "&";
+		}
+		if (!Author.isEmpty()) {
+			result = result + "author=" + Author + "&";
+
+		}
+		if (!isbnFsk.isEmpty()) {
+			result = result + "isbn=" + isbnFsk + "&";
+
+		}
+		if (category != mediaCategory.noCategory) {
+			result = result + "category=" + category.toString() + "&";
+		}
+		result = result.substring(0, result.length() - 1);
+		return result;
+	}
+
+	@GetMapping(value = { "/listAllMedia/{name}" })
+	public String showAllMedia(Model model, @PathVariable String name) {
+		model.addAttribute("media", mediaManagement.mediaService.getMedia(name));
+		return "listMedia";
+	}
+
+	@GetMapping("/listAllMediaBy")
+	public String showAllMedia(Model model, @RequestParam(required = false) String name,
+			@RequestParam(required = false) String author,
+			@RequestParam(required = false) String isbnfsk, @RequestParam(required = false) String category) {
+		List<Media> res = new ArrayList<>();
+		List<Media> result;
+		int temp = 0;
+		if (name != null) {
+			res.addAll(mediaManagement.mediaService.getMedia(name.replace("+", " ")));
+			temp++;
+		}
+		if (author != null) {
+			res.addAll(mediaManagement.mediaService.getMediaByAuthor(author.replace("+", " ")));
+			temp++;
+		}
+		if (isbnfsk != null) {
+			res.addAll(mediaManagement.mediaService.getMediaByISBN(isbnfsk.replace("+", " ")));
+			temp++;
+		}
+		if (category != null) {
+			res.addAll(mediaManagement.mediaService
+					.getMediaByCategory(mediaCategory.valueOf(category.replace("+", " "))));
+			temp++;
+		}
+		if (temp > 1) {
+			result = res.stream()
+					.filter(e -> Collections.frequency(res, e) > 1)
+					.distinct()
+					.collect(Collectors.toList());
+		} else {
+			result = res;
+		}
+
+		model.addAttribute("media", result);
+		return "listMedia";
+	}
+
+	@RequestMapping(value = { "/listMediaWithID/{id}" }, method = RequestMethod.GET)
+	public String showAllMedia(Model model, @PathVariable UUID id) {
+		model.addAttribute("media", mediaManagement.mediaService.getMedia(id));
+		return "listMedia";
+	}
+
+	@RequestMapping(value = { "/addRental" }, method = RequestMethod.POST)
+	public String addRental(Model model,
+			@ModelAttribute("rentalDTO") RentalDTO rDTO) {
+		UUID mID = rDTO.getMediaID();
+		UUID pID = rDTO.getPersonID();
+		try {
+			mediaManagement.rentMedia(mID, pID);
+		} catch (Exception e) {
+			return "redirect:/ageException?pID="+pID;
+		}
+		return "redirect:/";
+	}
+	@GetMapping("/ageException")
+	public String showAgeExeptionPage(Model model, @RequestParam(required = false) String pID) {
+
+		model.addAttribute("person", mediaManagement.personalDataService.gPersonalData(UUID.fromString(pID)));
+		return "ageExept";
+	}
+	@GetMapping(value = { "/addRental" })
+	public String showAddRentalPage(Model model) {
+		RentalDTO rDTO = new RentalDTO();
+		model.addAttribute("rentalDTO", rDTO);
+		model.addAttribute("persons", mediaManagement.personalDataService.getAll());
+		model.addAttribute("media", mediaManagement.mediaService.getAllNotRented());
+
+		return "addRental";
+	}
+
+	@GetMapping(value = { "/findRentals" })
+	public String showFindRentalPage(Model model) {
+		RentalDTO rDTO = new RentalDTO();
+		model.addAttribute("rentalDTO", rDTO);
+		model.addAttribute("persons", mediaManagement.personalDataService.getAll());
+		model.addAttribute("media", mediaManagement.mediaService.getAll());
+
+		return "findRentals";
+	}
+
+	@PostMapping(value = { "/findRentals" })
+	public String findRentals(
+			@ModelAttribute("rentalDTO") RentalDTO rDTO) {
+		UUID pID = rDTO.getPersonID();
+		return "redirect:/listAllRentalsBy?pID=" + pID.toString();
+	}
+
+	@GetMapping("/listAllRentalsBy")
+	public String showAllRentals(Model model, @RequestParam(required = false) String pID) {
+		List<Rental> result = mediaManagement.rentalService.getRentalsPerPerson(UUID.fromString(pID));
+		Map<UUID, Media> media = ((List<Media>) mediaManagement.mediaService.getAll()).stream()
+				.collect(Collectors.toMap(Media::getId, Function.identity()));
+		model.addAttribute("rental", result);
+		model.addAttribute("mediaMap", media);
+		return "listRentals";
+	}
+
+	@GetMapping(value = { "/returnMedia" })
+	public String showReturnMediaPage(Model model) {
+		RentalDTO rDTO = new RentalDTO();
+		model.addAttribute("rentalDTO", rDTO);
+		model.addAttribute("rentals", mediaManagement.rentalService.getAll());
+		model.addAttribute("media", mediaManagement.mediaService.getAll());
+		model.addAttribute("persons", mediaManagement.personalDataService.getAll());
+
+		return "returnRentalWithRentalID";
+	}
+
+	@PostMapping(value = { "/returnMediaWithRentalID" })
+	public String returnMedia(
+			@ModelAttribute("rentalDTO") RentalDTO rDTO) {
+		UUID rID = rDTO.getRentalID();
+		mediaManagement.returnMedia(rID);
+		return "redirect:/";
+	}
 }

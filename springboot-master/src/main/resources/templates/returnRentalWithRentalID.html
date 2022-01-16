@@ -22,33 +22,24 @@
   <!--[if IE]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
   <![endif]-->
-
-
   <main>
+
     <h1>
       <a href="/">Home</a>
     </h1>
-    <form th:action="@{/addRental}" th:object="${rentalDTO}" method="POST">
-      Person:
-      <select th:field="*{personID}">
-        <option th:each="t : ${persons}" th:value="${t.id}" th:text="${t.name + ' ' + t.lastName}">
+    <form th:action="@{/returnMediaWithRentalID}" th:object="${rentalDTO}" method="POST">
+      <br />
+      Rental:
+      <select th:field="*{rentalID}">
+        <option th:value="null" th:text="null"></option>
+        <option th:each="t : ${rentals}" th:value="${t.id}" th:text="${t.id}">
         </option>
       </select>
       <br />
-      Medium:
-      <select th:field="*{mediaID}">
-        <option th:each="t : ${media}" th:value="${t.id}" th:text="${t.name + ' ' + t.author}">
-        </option>
-      </select>
-      <br />
-      <input type="submit" value="Add Rental" />
+      <input type="submit" value="Return" />
     </form>
-    <br /><br />
-
   </main>
   <!-- /.container -->
-
-
 
   <script src="js/vendor/modernizr-3.7.1.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -71,9 +62,6 @@
     ga('send', 'pageview')
   </script>
   <script src="https://www.google-analytics.com/analytics.js" async></script>
-
-
-
 </body>
 
 </html>

@@ -28,27 +28,33 @@
     <h1>
       <a href="/">Home</a>
     </h1>
-    <form th:action="@{/addRental}" th:object="${rentalDTO}" method="POST">
-      Person:
-      <select th:field="*{personID}">
-        <option th:each="t : ${persons}" th:value="${t.id}" th:text="${t.name + ' ' + t.lastName}">
-        </option>
-      </select>
-      <br />
-      Medium:
-      <select th:field="*{mediaID}">
-        <option th:each="t : ${media}" th:value="${t.id}" th:text="${t.name + ' ' + t.author}">
-        </option>
-      </select>
-      <br />
-      <input type="submit" value="Add Rental" />
-    </form>
-    <br /><br />
-
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Author</th>
+        <th>type</th>
+        <th>isbn</th>
+        <th>fsk</th>
+        <th>length</th>
+        <th>category</th>
+        <th>Shelf Number</th>
+        <th>Is Rented Out</th>
+      </tr>
+      <tr th:each="d : ${media}">
+        <td th:utext="${d.id}">...</td>
+        <td th:utext="${d.name}">...</td>
+        <td th:utext="${d.author}">...</td>
+        <td th:utext="${d.type}">...</td>
+        <td th:utext="${d.iSBN}">...</td>
+        <td th:utext="${d.fSK}">...</td>
+        <td th:utext="${d.length}">...</td>
+        <td th:utext="${d.category}">...</td>
+        <td th:utext="${d.shelfNr}">...</td>
+        <td th:utext="${d.isRented}">...</td>
+      </tr>
+    </table>
   </main>
-  <!-- /.container -->
-
-
 
   <script src="js/vendor/modernizr-3.7.1.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"

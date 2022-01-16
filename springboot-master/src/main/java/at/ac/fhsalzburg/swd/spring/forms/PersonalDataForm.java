@@ -15,9 +15,16 @@ public class PersonalDataForm {
     private Date birthday;
     private String eMail;
     private personCategory category;
+    private Boolean isStudent;
 
     public String getName() {
         return name;
+    }
+    public Boolean getIsStudent() {
+        return isStudent;
+    }
+    public void setIsStudent(Boolean isStudent) {
+        this.isStudent = isStudent;
     }
     public void setName(String name) {
         this.name = name;

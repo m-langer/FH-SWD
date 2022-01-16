@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-public interface RentalRepository extends CrudRepository<Rental, Long> {
+public interface RentalOldRepository extends CrudRepository<Rental, Long> {
 
 	@Transactional(timeout = 10)
 	Rental findById(UUID id);

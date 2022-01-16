@@ -36,9 +36,9 @@ public class RentalRepositoryTest {
     @Test
     public void whenFindByPersonId_thenReturnRentalsFromPerson() {
         // given
-        Media m = new Media("Max", "Mustermann", mediaType.specializedBook, "ISBN", null, 10, mediaCategory.biology);
-        Media m2 = new Media("Max", "Mustermann", mediaType.specializedBook, "ISBN", null, 10, mediaCategory.biology);
-        Media m3 = new Media("Max", "Mustermann", mediaType.specializedBook, "ISBN", null, 10, mediaCategory.biology);
+        Media m = new Media("Max", "Mustermann", mediaType.specializedBook, "ISBN", null, 10, mediaCategory.biology,1);
+        Media m2 = new Media("Max", "Mustermann", mediaType.specializedBook, "ISBN", null, 10, mediaCategory.biology,1);
+        Media m3 = new Media("Max", "Mustermann", mediaType.specializedBook, "ISBN", null, 10, mediaCategory.biology,1);
         PersonalData p = new PersonalData("Max", "Mustermann", "Musterstraße", new Date(1, 1, 2000), "max@muster.com",personCategory.adultCust);
         Rental r = new Rental(m.getId(), p.getId(), new Date(), new Date());
         Rental r2 = new Rental(m2.getId(), p.getId(), new Date(), new Date());

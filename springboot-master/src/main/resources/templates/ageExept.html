@@ -28,27 +28,8 @@
     <h1>
       <a href="/">Home</a>
     </h1>
-    <form th:action="@{/addRental}" th:object="${rentalDTO}" method="POST">
-      Person:
-      <select th:field="*{personID}">
-        <option th:each="t : ${persons}" th:value="${t.id}" th:text="${t.name + ' ' + t.lastName}">
-        </option>
-      </select>
-      <br />
-      Medium:
-      <select th:field="*{mediaID}">
-        <option th:each="t : ${media}" th:value="${t.id}" th:text="${t.name + ' ' + t.author}">
-        </option>
-      </select>
-      <br />
-      <input type="submit" value="Add Rental" />
-    </form>
-    <br /><br />
-
+    <H2 th:text="${'The Customer ' + person.name+ ' is under age and can therefore not rent Adult Movies'}"></H2>
   </main>
-  <!-- /.container -->
-
-
 
   <script src="js/vendor/modernizr-3.7.1.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"

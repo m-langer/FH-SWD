@@ -28,6 +28,7 @@ public class Rental {
     private Date date;
     private Date latestReturn;
 
+    protected Rental() {}
 
     public Rental(UUID mediaID, UUID personID, Date date, Date latestReturn) {
         this.mediaID = mediaID;

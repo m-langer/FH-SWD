@@ -19,32 +19,36 @@
 </head>
 
 <body>
-  <!--[if IE]>
-    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-  <![endif]-->
-
 
   <main>
     <h1>
       <a href="/">Home</a>
     </h1>
-    <form th:action="@{/addRental}" th:object="${rentalDTO}" method="POST">
-      Person:
-      <select th:field="*{personID}">
-        <option th:each="t : ${persons}" th:value="${t.id}" th:text="${t.name + ' ' + t.lastName}">
-        </option>
-      </select>
-      <br />
-      Medium:
-      <select th:field="*{mediaID}">
-        <option th:each="t : ${media}" th:value="${t.id}" th:text="${t.name + ' ' + t.author}">
-        </option>
-      </select>
-      <br />
-      <input type="submit" value="Add Rental" />
-    </form>
-    <br /><br />
 
+
+    <form th:action="@{/findMedia}" th:object="${mediaDTO}" method="POST">
+    <br/>
+      Name:
+      <input type="text" th:field="*{name}" />
+      <br />
+      Author:
+      <input type="text" th:field="*{author}" />
+      <br />
+      ISBN / FSK
+      <input type="text" th:field="*{iSBNfSK}" />
+      <br />
+      Category:
+      <select th:field="*{category}">
+        <option th:each="c : ${T(at.ac.fhsalzburg.swd.spring.enums.mediaCategory).values()}"
+                th:value="${c}"
+                th:text="${c}">
+        </option>
+    </select>
+      <br />
+      <input type="submit" value="Find Media" />
+    </form>
+
+    <br /><br />
   </main>
   <!-- /.container -->
 

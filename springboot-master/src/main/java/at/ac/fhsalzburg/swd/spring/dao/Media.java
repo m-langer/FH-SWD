@@ -56,18 +56,6 @@ public class Media {
         this.isRented = false;
     }
 
-    public Media(String name, String author, mediaType type, String iSBN, String fSK, int length,
-    mediaCategory category) {
-this.name = name;
-this.author = author;
-this.type = type;
-this.iSBN = iSBN;
-this.fSK = fSK;
-this.length = length;
-this.category = category;
-this.isRented = false;
-}
-
     public UUID getId() {
         return id;
     }

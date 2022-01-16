@@ -1,5 +1,6 @@
 package at.ac.fhsalzburg.swd.spring.services;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,20 @@ public class PaymentService implements IPaymentService {
     }
 
     @Override
-    public void addPayment(UUID personID, int amount, String description) {
+    public void addPayment(UUID personID, long amount, String description) {
         repo.save(new Payment(personID, amount, description));
+    }
+
+    @Override
+    public List<Payment> getPaymentsPerPerson(UUID personID) {
+        // TODO Auto-generated method stub
+        return repo.findByPersonID(personID);
+    }
+
+    @Override
+    public List<Payment> getAll() {
+        // TODO Auto-generated method stub
+        return (List<Payment>) repo.findAll();
     }
     
 }

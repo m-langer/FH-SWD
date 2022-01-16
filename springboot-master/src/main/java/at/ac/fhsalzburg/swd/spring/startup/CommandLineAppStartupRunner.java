@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import at.ac.fhsalzburg.swd.spring.mediaManagement;
 import at.ac.fhsalzburg.swd.spring.dao.Customer;
 import at.ac.fhsalzburg.swd.spring.dao.CustomerRepository;
 import at.ac.fhsalzburg.swd.spring.enums.mediaCategory;
@@ -42,6 +43,9 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
     @Autowired
     IPaymentService paymentService;
 
+    @Autowired
+    mediaManagement mediaMgnt;
+
     // Initialize System with preset accounts and stocks
     @Override
     @Transactional // this method runs within one database transaction; performing a commit at the
@@ -50,9 +54,9 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
         personalDataService.addData("Max", "Mustermann1", "Musterhausen 1", new Date(10, 4, 2005), "hi@test.com");
         personalDataService.addData("Michael", "Mustermann2", "Musterhausen 6", new Date(12, 6, 2002), "mich@test.com");
         personalDataService.addData("Max", "Musterfrau", "Musterhausen 1", new Date(10, 4, 1998), "frau@test.com");
-        mediaService.addBook("Test buch", "Test Auto", "123456789", 319, mediaCategory.thriller, false);
-        mediaService.addMovie("Test Movie", "Adult Director", "18", 50, mediaCategory.action, true);
-        mediaService.addCD("Casset Player", "Lena", 70, mediaCategory.thriller);
+        mediaService.addBook("Test buch", "Test Auto", "123456789", 319, mediaCategory.thriller, false, 3);
+        mediaService.addMovie("Test Movie", "Adult Director", "18", 50, mediaCategory.action, true,9);
+        mediaService.addCD("Casset Player", "Lena", 70, mediaCategory.thriller, 21);
         paymentService.addPayment(personalDataService.getByLastName("Mustermann1").get(0).getId(), 10, "Hi das ist ein Test");
 
 

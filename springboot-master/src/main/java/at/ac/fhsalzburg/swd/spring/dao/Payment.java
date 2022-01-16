@@ -13,10 +13,12 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private UUID personID;
-    private int amount;
+    private long amount;
     private String description;
 
-    public Payment(UUID personID, int amount, String description) {
+    protected Payment(){}
+
+    public Payment(UUID personID, long amount, String description) {
         this.personID = personID;
         this.amount = amount;
         this.description = description;
@@ -33,7 +35,7 @@ public class Payment {
     public void setPersonID(UUID personID) {
         this.personID = personID;
     }
-    public int getAmount() {
+    public long getAmount() {
         return amount;
     }
     public void setAmount(int amount) {

@@ -13,6 +13,11 @@ public interface IRentalService {
     public Rental findRental(UUID rentalId);
 
     public List<Rental> getRentalsPerPerson(UUID personId);
+    public List<Rental> getOldRentalsPerPerson(UUID personId);
 
-    
+    public List<Rental> getAll();
+    public List<Rental> getAllOld();
+
+    public void removeRental(UUID rentalID);
+
 }

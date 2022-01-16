@@ -19,16 +19,12 @@
 </head>
 
 <body>
-  <!--[if IE]>
-    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-  <![endif]-->
-
 
   <main>
 
-    <h1>Spring Boot Web Thymeleaf Example Add</h1>
-    <h2>
-    </h2>
+    <h1>
+      <a href="/">Home</a>
+    </h1>
 
 
     <form th:action="@{/addMedia}" th:object="${mediaDTO}" method="POST">
@@ -51,6 +47,9 @@
       <br />
       Length
       <input type="text" th:field="*{length}" />
+      <br />
+      Shelf Number
+      <input type="text" th:field="*{shelfNr}" />
       <br />
       Category:
       <select th:field="*{category}">

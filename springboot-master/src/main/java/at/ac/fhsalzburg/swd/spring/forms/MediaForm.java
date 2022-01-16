@@ -12,9 +12,18 @@ public class MediaForm {
     private int length;
     private mediaCategory category;
     private Boolean special;
+    private int shelfNr;
 
     public String getName() {
         return name;
+    }
+
+    public int getShelfNr() {
+        return shelfNr;
+    }
+
+    public void setShelfNr(int shelfNr) {
+        this.shelfNr = shelfNr;
     }
 
     public String getiSBNfSK() {
