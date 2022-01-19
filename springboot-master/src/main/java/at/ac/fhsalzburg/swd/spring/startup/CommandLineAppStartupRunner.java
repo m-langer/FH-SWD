@@ -54,11 +54,13 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
         personalDataService.addData("Max", "Mustermann1", "Musterhausen 1", new Date(10, 4, 2005), "hi@test.com");
         personalDataService.addData("Michael", "Mustermann2", "Musterhausen 6", new Date(12, 6, 2002), "mich@test.com");
         personalDataService.addData("Max", "Musterfrau", "Musterhausen 1", new Date(10, 4, 1998), "frau@test.com");
-        mediaService.addBook("Test buch", "Test Auto", "123456789", 319, mediaCategory.thriller, false, 3);
-        mediaService.addMovie("Test Movie", "Adult Director", "18", 50, mediaCategory.action, true,9);
-        mediaService.addCD("Casset Player", "Lena", 70, mediaCategory.thriller, 21);
-        paymentService.addPayment(personalDataService.getByLastName("Mustermann1").get(0).getId(), 10, "Hi das ist ein Test");
-
+        mediaService.addBook("Ein Toller Roman", "Rita Falk", "123456789", 259, mediaCategory.thriller, false, 3);
+        mediaService.addBook("Einzig mögliche Zeit", "Wolfgang Joop", "987654321", 319, mediaCategory.thriller, false, 3);
+        mediaService.addBook("Das Universum", "Stephen Hawking", "73759365836", 195, mediaCategory.physics, true, 3);
+        mediaService.addMovie("James Bond", "Quentin Terentino", "6", 50, mediaCategory.thriller, false,9);
+        mediaService.addMovie("Adult Movie", "James Cameron", "18", 50, mediaCategory.action, true,9);
+        mediaService.addCD("Casset Player", "Lena", 70, mediaCategory.fantasy, 21);
+        paymentService.addPayment(personalDataService.getByLastName("Mustermann1").get(0).getId(), 10, "Eine Zahlung von 10€ ist überfällig.");
 
         customerService.addCustomer("Max", "Mustermann3", "max@muster.man", "123");
         productService.addProduct("first product", 3.30f);

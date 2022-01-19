@@ -1,4 +1,4 @@
-package at.ac.fhsalzburg.swd.spring.forms;
+package at.ac.fhsalzburg.swd.spring.dto;
 
 import java.nio.LongBuffer;
 import java.time.LocalDate;

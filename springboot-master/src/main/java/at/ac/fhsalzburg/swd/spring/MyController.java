@@ -35,11 +35,11 @@ import at.ac.fhsalzburg.swd.spring.dao.Customer;
 import at.ac.fhsalzburg.swd.spring.dao.Media;
 import at.ac.fhsalzburg.swd.spring.dao.PersonalData;
 import at.ac.fhsalzburg.swd.spring.dao.Rental;
+import at.ac.fhsalzburg.swd.spring.dto.MediaDTO;
+import at.ac.fhsalzburg.swd.spring.dto.PersonalDataDTO;
+import at.ac.fhsalzburg.swd.spring.dto.RentalDTO;
 import at.ac.fhsalzburg.swd.spring.enums.mediaCategory;
 import at.ac.fhsalzburg.swd.spring.enums.mediaType;
-import at.ac.fhsalzburg.swd.spring.forms.MediaForm;
-import at.ac.fhsalzburg.swd.spring.forms.PersonalDataForm;
-import at.ac.fhsalzburg.swd.spring.forms.RentalDTO;
 import at.ac.fhsalzburg.swd.spring.services.CustomerServiceInterface;
 import at.ac.fhsalzburg.swd.spring.services.IPersonalDataService;
 
@@ -183,7 +183,7 @@ public class MyController {
 	//
 	@PostMapping(value = { "/addPersonalData" })
 	public String addPersonalData(Model model, //
-			@ModelAttribute("personalDataForm") PersonalDataForm pDForm) { // The @ModelAttribute is an annotation that
+			@ModelAttribute("personalDataForm") PersonalDataDTO pDForm) { // The @ModelAttribute is an annotation that
 																			// binds a method parameter or method return
 																			// value to a named model attribute and then
 																			// exposes it to a web view:
@@ -199,7 +199,7 @@ public class MyController {
 
 	@GetMapping(value = { "/addPersonalData" })
 	public String showAddPersonalDataPage(Model model) {
-		PersonalDataForm personalDataForm = new PersonalDataForm();
+		PersonalDataDTO personalDataForm = new PersonalDataDTO();
 		personalDataForm.setIsStudent(false);
 		model.addAttribute("personalDataForm", personalDataForm);
 		return "addPersonalData";
@@ -207,7 +207,7 @@ public class MyController {
 
 	@PostMapping(value = { "/addMedia" })
 	public String addMedia(Model model,
-			@ModelAttribute("mediaDTO") MediaForm mForm) {
+			@ModelAttribute("mediaDTO") MediaDTO mForm) {
 		String Name = mForm.getName();
 		String Author = mForm.getAuthor();
 		int length = mForm.getLength();
@@ -242,7 +242,7 @@ public class MyController {
 
 	@GetMapping(value = { "/addMedia" })
 	public String showAddMediaPage(Model model) {
-		MediaForm mDTO = new MediaForm();
+		MediaDTO mDTO = new MediaDTO();
 		model.addAttribute("mediaDTO", mDTO);
 
 		return "addMedia";
@@ -256,7 +256,7 @@ public class MyController {
 
 	@GetMapping(value = { "/findMedia" })
 	public String showFindMediaPage(Model model) {
-		MediaForm mDTO = new MediaForm();
+		MediaDTO mDTO = new MediaDTO();
 		model.addAttribute("mediaDTO", mDTO);
 
 		return "findMedia";
@@ -264,7 +264,7 @@ public class MyController {
 
 	@PostMapping(value = { "/findMedia" })
 	public String findMedia(
-			@ModelAttribute("mediaDTO") MediaForm mForm) {
+			@ModelAttribute("mediaDTO") MediaDTO mForm) {
 		String Name = mForm.getName();
 		String Author = mForm.getAuthor();
 		String isbnFsk = mForm.getiSBNfSK();
@@ -319,6 +319,7 @@ public class MyController {
 			temp++;
 		}
 		if (temp > 1) {
+			//
 			result = res.stream()
 					.filter(e -> Collections.frequency(res, e) > 1)
 					.distinct()

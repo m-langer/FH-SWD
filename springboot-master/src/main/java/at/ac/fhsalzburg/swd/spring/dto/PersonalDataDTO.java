@@ -1,4 +1,4 @@
-package at.ac.fhsalzburg.swd.spring.forms;
+package at.ac.fhsalzburg.swd.spring.dto;
 
 import java.util.Date;
 
@@ -7,7 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import at.ac.fhsalzburg.swd.spring.enums.personCategory;
 
 
-public class PersonalDataForm {
+public class PersonalDataDTO {
     private String name;
     private String lastName;
     private String adress;

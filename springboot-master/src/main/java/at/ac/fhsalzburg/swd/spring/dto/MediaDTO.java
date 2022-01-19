@@ -1,9 +1,9 @@
-package at.ac.fhsalzburg.swd.spring.forms;
+package at.ac.fhsalzburg.swd.spring.dto;
 
 import at.ac.fhsalzburg.swd.spring.enums.mediaCategory;
 import at.ac.fhsalzburg.swd.spring.enums.mediaType;
 
-public class MediaForm {
+public class MediaDTO {
 
     private String name;
     private String author;
